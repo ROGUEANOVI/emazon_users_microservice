@@ -5,11 +5,13 @@ import lombok.NoArgsConstructor;
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
-public class OpenApiDocumentation {
+public class OpenApiMessages {
 
-    public static final  String SECURITY_SCHEME_KEY = "basicAuth";
+    public static final  String SECURITY_SCHEME_KEY = "bearerAuth";
 
-    public static final  String SECURITY_SCHEME = "basic";
+    public static final  String SECURITY_SCHEME = "bearer";
+
+    public static final String BEARER_FORMAT = "JWT";
 
     public static final String TITLE = "Emazon Users Management API";
 
@@ -27,4 +29,16 @@ public class OpenApiDocumentation {
     public static final String REPOSITORY_URL = "https://github.com/ROGUEANOVI/emazon_users_microservice";
 
     public static final String EXTERNAL_DOCUMENT_DESCRIPTION = "Emazon Users Management API GitHub Repository";
+
+    public static final String CODE_200 = "200";
+
+    public static final String CODE_201 = "201";
+
+    public static final String CODE_400 = "400";
+
+    public static final String CODE_401 = "401";
+
+    public static final String CODE_403 = "403";
+
+    public static final String CODE_409 = "409";
 }

@@ -1,13 +1,13 @@
 package com.pragma.emazon.users_microservice.infrastructure.out.security.adapter;
 
-import com.pragma.emazon.users_microservice.domain.port.spi.IBCryptPasswordPort;
+import com.pragma.emazon.users_microservice.domain.port.spi.IBCryptPasswordSecurityPort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class BCryptPasswordAdapter implements IBCryptPasswordPort {
+public class BCryptPasswordSecurityAdapter implements IBCryptPasswordSecurityPort {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public BCryptPasswordAdapter() {
+    public BCryptPasswordSecurityAdapter() {
         this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
     }
 

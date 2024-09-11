@@ -6,7 +6,7 @@ import com.pragma.emazon.users_microservice.domain.exception.RoleNotFoundExcepti
 import com.pragma.emazon.users_microservice.domain.model.Role;
 import com.pragma.emazon.users_microservice.domain.model.User;
 import com.pragma.emazon.users_microservice.domain.port.api.IUserServicePort;
-import com.pragma.emazon.users_microservice.domain.port.spi.IBCryptPasswordPort;
+import com.pragma.emazon.users_microservice.domain.port.spi.IBCryptPasswordSecurityPort;
 import com.pragma.emazon.users_microservice.domain.port.spi.IRolePersistencePort;
 import com.pragma.emazon.users_microservice.domain.port.spi.IUserPersistencePort;
 
@@ -18,12 +18,12 @@ public class UserUseCase implements IUserServicePort {
 
     private final IRolePersistencePort rolePersistencePort;
 
-    private final IBCryptPasswordPort bCryptPasswordPort;
+    private final IBCryptPasswordSecurityPort bCryptPasswordPort;
 
     public UserUseCase(
             IUserPersistencePort userPersistencePort,
             IRolePersistencePort rolePersistencePort,
-            IBCryptPasswordPort bCryptPasswordPort
+            IBCryptPasswordSecurityPort bCryptPasswordPort
     ) {
 
         this.userPersistencePort = userPersistencePort;

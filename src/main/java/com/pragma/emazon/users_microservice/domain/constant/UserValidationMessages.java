@@ -24,23 +24,23 @@ public class UserValidationMessages {
 
     public static final String INVALID_FIRST_NAME_SIZE = "First name size cannot be more than 100 characters";
 
-    public static final String INVALID_LAST_NAME_NULL_EMPTY_BLANK = "Last name cannot be null, empty or blank characters";
+    public static final String INVALID_LAST_NAME_NULL_EMPTY_BLANK = "Last name cannot be null, empty or only blank characters";
 
     public static final String INVALID_LAST_NAME_SIZE = "Last name size cannot be more than 100 characters";
 
-    public static final String INVALID_DOCUMENT_ID_NULL_EMPTY_BLANK = "Document id cannot be null, empty or blank characters";
+    public static final String INVALID_DOCUMENT_ID_NULL_EMPTY_BLANK = "Document id cannot be null, empty or only blank characters";
 
     public static final String INVALID_DOCUMENT_ID_SIZE = "The document id between 9 and 20 characters long";
 
     public static final String INVALID_DOCUMENT_ID_PATTERN = "The document id must be numeric";
 
-    public static final String INVALID_PHONE_NUMBER_NULL_EMPTY_BLANK = "Phone number cannot be null, empty or blank characters";
+    public static final String INVALID_PHONE_NUMBER_NULL_EMPTY_BLANK = "Phone number cannot be null, empty or only blank characters";
 
     public static final String INVALID_PHONE_NUMBER_SIZE = "The phone number must be between 7 and 13 characters long";
 
     public static final String INVALID_PHONE_NUMBER_PATTERN = "The phone number must be numeric";
 
-    public static final String INVALID_BIRTH_DATE_NULL_EMPTY_BLANK = "Birth date cannot be null, empty or blank characters";
+    public static final String INVALID_BIRTH_DATE_NULL_EMPTY_BLANK = "Birth date cannot be null, empty or only blank characters";
 
     public static final String INVALID_BIRTH_DATE_FORMAT = "The birth date must have a valid date with the format yyyy-MM-dd";
 
@@ -48,7 +48,7 @@ public class UserValidationMessages {
 
     public static final String INVALID_EMAIL_FORMAT = "The email address is not valid";
 
-    public static final String INVALID_PASSWORD_NULL_EMPTY_BLANK = "Password cannot be null, empty or blank characters";
+    public static final String INVALID_PASSWORD_NULL_EMPTY_BLANK = "Password cannot be null, empty or only blank characters";
 
     public static final String INVALID_PASSWORD_SIZE = "The password must be between 8 and 128 characters long";
 

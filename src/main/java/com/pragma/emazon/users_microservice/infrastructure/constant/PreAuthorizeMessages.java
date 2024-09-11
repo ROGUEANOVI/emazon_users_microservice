@@ -9,5 +9,7 @@ public class PreAuthorizeMessages {
 
     public static final String DENY_ALL = "denyAll()";
 
+    public static final String PERMIT_ALL = "permitAll()";
+
     public static final String HAS_ROLE_ADMIN = "hasRole('ROLE_ADMIN')";
 }

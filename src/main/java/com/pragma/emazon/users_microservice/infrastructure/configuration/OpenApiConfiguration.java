@@ -10,7 +10,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.pragma.emazon.users_microservice.infrastructure.constant.OpenApiDocumentation.*;
+import static com.pragma.emazon.users_microservice.infrastructure.constant.OpenApiMessages.*;
 
 @Configuration
 public class OpenApiConfiguration {
@@ -23,6 +23,7 @@ public class OpenApiConfiguration {
                 .addSecuritySchemes(SECURITY_SCHEME_KEY, new SecurityScheme()
                     .type(SecurityScheme.Type.HTTP)
                     .scheme(SECURITY_SCHEME)
+                    .bearerFormat(BEARER_FORMAT)
                 )
             )
             .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_KEY))

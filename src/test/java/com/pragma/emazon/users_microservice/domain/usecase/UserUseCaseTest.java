@@ -7,7 +7,7 @@ import com.pragma.emazon.users_microservice.domain.exception.UserAlreadyExistsEx
 import com.pragma.emazon.users_microservice.domain.exception.UserIsNotAdultException;
 import com.pragma.emazon.users_microservice.domain.model.Role;
 import com.pragma.emazon.users_microservice.domain.model.User;
-import com.pragma.emazon.users_microservice.domain.port.spi.IBCryptPasswordPort;
+import com.pragma.emazon.users_microservice.domain.port.spi.IBCryptPasswordSecurityPort;
 import com.pragma.emazon.users_microservice.domain.port.spi.IRolePersistencePort;
 import com.pragma.emazon.users_microservice.domain.port.spi.IUserPersistencePort;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +31,7 @@ class UserUseCaseTest {
     private IRolePersistencePort rolePersistencePort;
 
     @Mock
-    private IBCryptPasswordPort bCryptPasswordPort;
+    private IBCryptPasswordSecurityPort bCryptPasswordPort;
 
     @InjectMocks
     private UserUseCase userUseCase;
