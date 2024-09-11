@@ -1,14 +1,14 @@
 package com.pragma.emazon.users_microservice.infrastructure.configuration;
 
 import com.pragma.emazon.users_microservice.domain.port.api.IUserServicePort;
-import com.pragma.emazon.users_microservice.domain.port.spi.IBCryptPasswordPort;
+import com.pragma.emazon.users_microservice.domain.port.spi.IBCryptPasswordSecurityPort;
 import com.pragma.emazon.users_microservice.domain.port.spi.IRolePersistencePort;
 import com.pragma.emazon.users_microservice.domain.port.spi.IUserPersistencePort;
 import com.pragma.emazon.users_microservice.domain.usecase.UserUseCase;
 import com.pragma.emazon.users_microservice.infrastructure.out.jpa.adapter.UserJpaAdapter;
 import com.pragma.emazon.users_microservice.infrastructure.out.jpa.mapper.UserEntityMapper;
 import com.pragma.emazon.users_microservice.infrastructure.out.jpa.repository.IUserRepository;
-import com.pragma.emazon.users_microservice.infrastructure.out.security.adapter.BCryptPasswordAdapter;
+import com.pragma.emazon.users_microservice.infrastructure.out.security.adapter.BCryptPasswordSecurityAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,9 +30,9 @@ public class UserConfiguration {
     }
 
     @Bean
-    public IBCryptPasswordPort bCryptPasswordPort() {
+    public IBCryptPasswordSecurityPort bCryptPasswordPort() {
 
-        return new BCryptPasswordAdapter();
+        return new BCryptPasswordSecurityAdapter();
     }
 
     @Bean

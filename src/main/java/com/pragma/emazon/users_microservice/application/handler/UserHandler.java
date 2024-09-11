@@ -6,11 +6,9 @@ import com.pragma.emazon.users_microservice.domain.port.api.IUserServicePort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 @Validated
 public class UserHandler implements IUserHandler {

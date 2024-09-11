@@ -10,12 +10,12 @@ import static org.mockito.Mockito.*;
 class BCryptPasswordAdapterTest {
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-    private BCryptPasswordAdapter bCryptPasswordAdapter;
+    private BCryptPasswordSecurityAdapter bCryptPasswordAdapter;
 
     @BeforeEach
     void setUp() {
         bCryptPasswordEncoder = mock(BCryptPasswordEncoder.class);
-        bCryptPasswordAdapter = new BCryptPasswordAdapter();
+        bCryptPasswordAdapter = new BCryptPasswordSecurityAdapter();
     }
 
     @Test

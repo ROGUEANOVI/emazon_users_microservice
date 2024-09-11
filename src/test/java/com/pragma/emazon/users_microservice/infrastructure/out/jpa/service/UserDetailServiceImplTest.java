@@ -1,15 +1,16 @@
 package com.pragma.emazon.users_microservice.infrastructure.out.jpa.service;
 
-import com.pragma.emazon.users_microservice.domain.constant.UserExceptionMessages;
-import com.pragma.emazon.users_microservice.domain.exception.UserNotFoundException;
+import com.pragma.emazon.users_microservice.domain.constant.AuthValidationMessages;
 import com.pragma.emazon.users_microservice.infrastructure.out.jpa.entity.RoleEntity;
 import com.pragma.emazon.users_microservice.infrastructure.out.jpa.entity.UserEntity;
 import com.pragma.emazon.users_microservice.infrastructure.out.jpa.repository.IUserRepository;
+import com.pragma.emazon.users_microservice.infrastructure.out.security.service.UserDetailServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -70,11 +71,11 @@ class UserDetailServiceImplTest {
         when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
 
         // Act & Assert
-        UserNotFoundException exception = assertThrows(UserNotFoundException.class, () -> {
+        BadCredentialsException exception = assertThrows(BadCredentialsException.class, () -> {
             userDetailService.loadUserByUsername(email);
         });
 
-        assertEquals(String.format(UserExceptionMessages.USER_NOT_FOUND, email), exception.getMessage());
+        assertEquals(AuthValidationMessages.INVALID_CREDENTIALS, exception.getMessage());
         verify(userRepository, times(1)).findByEmail(email);
     }
 }
