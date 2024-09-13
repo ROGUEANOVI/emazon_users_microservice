@@ -184,4 +184,150 @@ class UserUseCaseTest {
 
         verify(userPersistencePort, never()).createUser(any());
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Test
+    void createCustomerUserShouldCreateUserSuccessfully() {
+
+        // Arrange
+        User user = new User();
+        user.setFirstName("Pepito");
+        user.setLastName("Perez");
+        user.setDocumentId("123456789");
+        user.setPhoneNumber("+1234567890");
+        user.setBirthDate("2000-01-01");
+        user.setEmail("test@example.com");
+        user.setPassword("password");
+
+        Role role = new Role();
+        role.setName(RoleNames.ROLE_CUSTOMER);
+
+        when(userPersistencePort.existsUserByDocumentId(anyString())).thenReturn(false);
+        when(userPersistencePort.existsUserByEmail(anyString())).thenReturn(false);
+        when(rolePersistencePort.findRoleByName(RoleNames.ROLE_CUSTOMER)).thenReturn(Optional.of(role));
+        when(bCryptPasswordPort.encryptPassword("password")).thenReturn("encryptedPassword");
+
+        // Act
+        userUseCase.createCustomerUser(user);
+
+        // Assert
+        verify(rolePersistencePort).findRoleByName(RoleNames.ROLE_CUSTOMER);
+        verify(bCryptPasswordPort).encryptPassword("password");
+        verify(userPersistencePort).createUser(user);
+    }
+
+    @Test
+    void createCustomerUserShouldThrowExceptionWhenBirthDateNoMatchWithDateFormat() {
+        // Arrange
+        User user = new User();
+        user.setFirstName("Pepito");
+        user.setLastName("Perez");
+        user.setDocumentId("123456789");
+        user.setPhoneNumber("+1234567890");
+        user.setBirthDate("2005-08-32");
+        user.setEmail("test@example.com");
+        user.setPassword("password");
+
+        // Act & Assert
+        assertThrows(InvalidUserBirthDateException.class, () -> userUseCase.createCustomerUser(user));
+
+        verify(userPersistencePort, never()).createUser(any());
+    }
+
+    @Test
+    void createCustomerUserShouldThrowExceptionWhenInvalidBirthDateIsInFuture() {
+        // Arrange
+        User user = new User();
+        user.setFirstName("Pepito");
+        user.setLastName("Perez");
+        user.setDocumentId("123456789");
+        user.setPhoneNumber("+1234567890");
+        user.setBirthDate("2050-01-01");
+        user.setEmail("test@example.com");
+        user.setPassword("password");
+
+        // Act & Assert
+        assertThrows(InvalidUserBirthDateException.class, () -> userUseCase.createCustomerUser(user));
+
+        verify(userPersistencePort, never()).createUser(any());
+    }
+
+    @Test
+    void createCustomerUserShouldThrowExceptionWhenUserIsNotAdult() {
+        // Arrange
+        User user = new User();
+        user.setFirstName("Pepito");
+        user.setLastName("Perez");
+        user.setDocumentId("123456789");
+        user.setPhoneNumber("+1234567890");
+        user.setBirthDate("2010-01-01");
+        user.setEmail("test@example.com");
+        user.setPassword("password");
+
+        // Act & Assert
+        assertThrows(UserIsNotAdultException.class, () -> userUseCase.createCustomerUser(user));
+
+        verify(userPersistencePort, never()).createUser(any());
+    }
+
+    @Test
+    void createCustomerUserShouldThrowExceptionWhenDocumentIdAlreadyExists() {
+        // Arrange
+        User user = new User();
+        user.setFirstName("Pepito");
+        user.setLastName("Perez");
+        user.setDocumentId("123456789");
+        user.setPhoneNumber("+1234567890");
+        user.setBirthDate("2000-01-01");
+        user.setEmail("test@example.com");
+        user.setPassword("password");
+
+        when(userPersistencePort.existsUserByDocumentId(anyString())).thenReturn(true);
+
+        // Act & Assert
+        assertThrows(UserAlreadyExistsException.class, () -> userUseCase.createCustomerUser(user));
+
+        verify(userPersistencePort, never()).createUser(any());
+    }
+
+    @Test
+    void createCustomerUserShouldThrowExceptionWhenEmailAlreadyExists() {
+        // Arrange
+        User user = new User();
+        user.setFirstName("Pepito");
+        user.setLastName("Perez");
+        user.setDocumentId("123456789");
+        user.setPhoneNumber("+1234567890");
+        user.setBirthDate("2000-01-01");
+        user.setEmail("test@example.com");
+        user.setPassword("password");
+
+        when(userPersistencePort.existsUserByEmail(anyString())).thenReturn(true);
+
+        // Act & Assert
+        assertThrows(UserAlreadyExistsException.class, () -> userUseCase.createCustomerUser(user));
+
+        verify(userPersistencePort, never()).createUser(any());
+    }
+
+    @Test
+    void createCustomerUserShouldThrowExceptionWhenRoleNotFound() {
+        // Arrange
+        User user = new User();
+        user.setFirstName("Pepito");
+        user.setLastName("Perez");
+        user.setDocumentId("123456789");
+        user.setPhoneNumber("+1234567890");
+        user.setBirthDate("2000-01-01");
+        user.setEmail("test@example.com");
+        user.setPassword("password");
+
+        when(rolePersistencePort.findRoleByName(RoleNames.ROLE_CUSTOMER)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(RoleNotFoundException.class, () -> userUseCase.createCustomerUser(user));
+
+        verify(userPersistencePort, never()).createUser(any());
+    }
 }

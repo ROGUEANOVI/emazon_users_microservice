@@ -22,4 +22,9 @@ public class UserHandler implements IUserHandler {
 
         userServicePort.createWarehouseAssistantUser(userRequestMapper.toUser(createUserRequest));
     }
+
+    @Override
+    public void createCustomerUser(CreateUserRequest createUserRequest) {
+        userServicePort.createCustomerUser(userRequestMapper.toUser(createUserRequest));
+    }
 }

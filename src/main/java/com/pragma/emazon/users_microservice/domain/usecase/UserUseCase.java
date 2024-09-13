@@ -49,4 +49,23 @@ public class UserUseCase implements IUserServicePort {
 
         userPersistencePort.createUser(user);
     }
+
+    @Override
+    public void createCustomerUser(User user) {
+
+        validateBirthDate(user.getBirthDate());
+        validateDocumentIdAlreadyExists(userPersistencePort.existsUserByDocumentId(user.getDocumentId()), user.getDocumentId());
+        validateEmailAlreadyExists(userPersistencePort.existsUserByEmail(user.getEmail()), user.getEmail());
+
+        Role role = rolePersistencePort.findRoleByName(RoleNames.ROLE_CUSTOMER)
+                .orElseThrow(() ->
+                        new RoleNotFoundException(RoleExceptionMessages.ROLE_NOT_FOUND, RoleNames.ROLE_CUSTOMER)
+                );
+
+        user.setRole(role);
+
+        user.setPassword(bCryptPasswordPort.encryptPassword(user.getPassword()));
+
+        userPersistencePort.createUser(user);
+    }
 }
