@@ -6,4 +6,6 @@ import jakarta.validation.Valid;
 public interface IUserHandler {
 
     void createWarehouseAssistantUser(@Valid CreateUserRequest createUserRequest);
+
+    void createCustomerUser(@Valid CreateUserRequest createUserRequest);
 }

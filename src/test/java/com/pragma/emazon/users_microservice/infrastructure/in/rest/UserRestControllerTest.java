@@ -57,4 +57,15 @@ class UserRestControllerTest {
 
         verify(userHandler).createWarehouseAssistantUser(Mockito.any(CreateUserRequest.class));
     }
+
+    @Test
+    @WithMockUser(authorities = {}, password = "password", roles = {}, setupBefore = TEST_METHOD, username = "", value = "user")
+    void createCustomerUserShouldReturnCreatedWhenRequestIsValid() throws Exception {
+        mockMvc.perform(post("/api/v1/users/customers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createUserRequest)))
+                .andExpect(status().isCreated());
+
+        verify(userHandler).createCustomerUser(Mockito.any(CreateUserRequest.class));
+    }
 }
