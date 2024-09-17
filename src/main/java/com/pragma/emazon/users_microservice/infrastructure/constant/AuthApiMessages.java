@@ -21,7 +21,9 @@ public class AuthApiMessages {
 
     public static final String DESCRIPTION_200 = "Authentication successful";
 
-    public static final String DESCRIPTION_401 = "Unauthorized. Email or password incorrect";
+    public static final String DESCRIPTION_400 = "Invalid credentials";
 
-    public static final String DESCRIPTION_403 = "Access denied. You don't have permission to access this resource";
+    public static final String DESCRIPTION_401 = "Unauthorized access";
+
+    public static final String DESCRIPTION_403 = "Access denied";
 }
