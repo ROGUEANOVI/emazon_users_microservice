@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static com.pragma.emazon.users_microservice.infrastructure.constant.PreAuthorizeMessages.*;
 import static com.pragma.emazon.users_microservice.infrastructure.constant.UserApiMessages.*;
+import static com.pragma.emazon.users_microservice.infrastructure.constant.AuthApiMessages.DESCRIPTION_403;
 
 @RestController
 @RequestMapping(ROUTE_USERS)
@@ -30,7 +31,8 @@ public class UserRestController {
     @ApiResponses(value = {
         @ApiResponse(responseCode = OpenApiMessages.CODE_201, description = DESCRIPTION_201, content = @Content),
         @ApiResponse(responseCode = OpenApiMessages.CODE_400, description = DESCRIPTION_400, content = @Content),
-        @ApiResponse(responseCode = OpenApiMessages.CODE_409, description = DESCRIPTION_409, content = @Content),
+        @ApiResponse(responseCode = OpenApiMessages.CODE_403, description = DESCRIPTION_403, content = @Content),
+        @ApiResponse(responseCode = OpenApiMessages.CODE_409, description = DESCRIPTION_409, content = @Content)
     })
     @PostMapping(ROUTE_WAREHOUSE_ASSISTANTS)
     @PreAuthorize(HAS_ROLE_ADMIN)
@@ -45,7 +47,7 @@ public class UserRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = OpenApiMessages.CODE_201, description = DESCRIPTION_201, content = @Content),
             @ApiResponse(responseCode = OpenApiMessages.CODE_400, description = DESCRIPTION_400, content = @Content),
-            @ApiResponse(responseCode = OpenApiMessages.CODE_409, description = DESCRIPTION_409, content = @Content),
+            @ApiResponse(responseCode = OpenApiMessages.CODE_409, description = DESCRIPTION_409, content = @Content)
     })
     @PostMapping(ROUTE_CUSTOMERS)
     @PreAuthorize(PERMIT_ALL)

@@ -35,8 +35,8 @@ public class AuthenticationRestController {
     @Operation(summary = SUMMARY_LOGIN, description = DESCRIPTION_LOGIN)
     @ApiResponses(value = {
         @ApiResponse(responseCode = OpenApiMessages.CODE_200, description = DESCRIPTION_200, content = @Content),
-        @ApiResponse(responseCode = OpenApiMessages.CODE_401, description = DESCRIPTION_401, content = @Content),
-        @ApiResponse(responseCode = OpenApiMessages.CODE_403, description = DESCRIPTION_403, content = @Content),
+        @ApiResponse(responseCode = OpenApiMessages.CODE_400, description = DESCRIPTION_400, content = @Content),
+        @ApiResponse(responseCode = OpenApiMessages.CODE_401, description = DESCRIPTION_401, content = @Content)
     })
     @PostMapping(ROUTE_LOGIN)
     public ResponseEntity<TokenResponse> authenticate(@Valid @RequestBody AuthRequest authRequest) {

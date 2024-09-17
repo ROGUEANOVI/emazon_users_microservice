@@ -34,32 +34,24 @@ public class UserUseCase implements IUserServicePort {
     @Override
     public void createWarehouseAssistantUser(User user) {
 
-        validateBirthDate(user.getBirthDate());
-        validateDocumentIdAlreadyExists(userPersistencePort.existsUserByDocumentId(user.getDocumentId()), user.getDocumentId());
-        validateEmailAlreadyExists(userPersistencePort.existsUserByEmail(user.getEmail()), user.getEmail());
-
-        Role role = rolePersistencePort.findRoleByName(RoleNames.ROLE_WAREHOUSE_ASSISTANT)
-                .orElseThrow(() ->
-                    new RoleNotFoundException(RoleExceptionMessages.ROLE_NOT_FOUND, RoleNames.ROLE_WAREHOUSE_ASSISTANT)
-                );
-
-        user.setRole(role);
-
-        user.setPassword(bCryptPasswordPort.encryptPassword(user.getPassword()));
-
-        userPersistencePort.createUser(user);
+        createUser(user, RoleNames.ROLE_WAREHOUSE_ASSISTANT);
     }
 
     @Override
     public void createCustomerUser(User user) {
 
+        createUser(user, RoleNames.ROLE_CUSTOMER);
+    }
+
+    private void createUser(User user, String roleName) {
+
         validateBirthDate(user.getBirthDate());
         validateDocumentIdAlreadyExists(userPersistencePort.existsUserByDocumentId(user.getDocumentId()), user.getDocumentId());
         validateEmailAlreadyExists(userPersistencePort.existsUserByEmail(user.getEmail()), user.getEmail());
 
-        Role role = rolePersistencePort.findRoleByName(RoleNames.ROLE_CUSTOMER)
+        Role role = rolePersistencePort.findRoleByName(roleName)
                 .orElseThrow(() ->
-                        new RoleNotFoundException(RoleExceptionMessages.ROLE_NOT_FOUND, RoleNames.ROLE_CUSTOMER)
+                        new RoleNotFoundException(RoleExceptionMessages.ROLE_NOT_FOUND, roleName)
                 );
 
         user.setRole(role);
